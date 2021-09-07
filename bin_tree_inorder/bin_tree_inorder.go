@@ -1,9 +1,24 @@
 package main
 
+import "fmt"
+
 //Problem: https://leetcode.com/problems/binary-tree-inorder-traversal/
 
 func main() {
-
+	root := &TreeNode{
+		Val:  1,
+		Left: nil,
+		Right: &TreeNode{
+			Val: 2,
+			Left: &TreeNode{
+				Val:   3,
+				Left:  nil,
+				Right: nil,
+			},
+			Right: nil,
+		},
+	}
+	fmt.Println(inorderTraversal(root))
 }
 
 type TreeNode struct {
