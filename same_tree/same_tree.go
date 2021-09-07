@@ -34,27 +34,11 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
-func traverse(node *TreeNode, values *[]int) {
-	if node == nil {
-		*values = append(*values, -1)
-		return
-	}
-	*values = append(*values, node.Val)
-	traverse(node.Left, values)
-	traverse(node.Right, values)
-}
-
 func isSameTree(p *TreeNode, q *TreeNode) bool {
-	var pValues, qValues = make([]int, 0), make([]int, 0)
-	traverse(p, &pValues)
-	traverse(q, &qValues)
-	if len(pValues) == len(qValues) {
-		for i := 0; i < len(pValues); i++ {
-			if pValues[i] != qValues[i] {
-				return false
-			}
-		}
+	if p == nil && q == nil {
 		return true
+	} else if p != nil && q != nil {
+		return p.Val == q.Val && isSameTree(p.Left, q.Left) && isSameTree(p.Right, q.Right)
 	}
 	return false
 }
