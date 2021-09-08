@@ -1,6 +1,6 @@
 package main
 
-import "sort"
+import "fmt"
 
 //Problem: https://leetcode.com/problems/merge-two-sorted-lists/
 
@@ -10,40 +10,55 @@ type ListNode struct {
 }
 
 func main() {
-	l1 := ListNode{}
-	l2 := ListNode{}
-
-	mergeTwoLists(&l1, &l2)
+	l1 := &ListNode{
+		Val: 1,
+		Next: &ListNode{
+			Val: 2,
+			Next: &ListNode{
+				Val:  4,
+				Next: nil,
+			},
+		},
+	}
+	l2 := &ListNode{
+		Val: 1,
+		Next: &ListNode{
+			Val: 3,
+			Next: &ListNode{
+				Val:  4,
+				Next: nil,
+			},
+		},
+	}
+	ans := mergeTwoLists(l1, l2)
+	fmt.Println(ans)
 }
 
-var traverse func(*ListNode)
-
 func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
-	vals := make([]int, 0)
-	traverse = func(node *ListNode) {
-		if node == nil {
-			return
+	if l1 == nil {
+		if l2 == nil {
+			return nil
 		}
-		vals = append(vals, node.Val)
-		traverse(node.Next)
-	}
-	traverse(l1)
-	traverse(l2)
-	sort.Sort(sort.Reverse(sort.IntSlice(vals)))
-
-	var root = &ListNode{}
-	var node *ListNode
-	var prevNode *ListNode
-
-	for i, v := range vals {
-		node = &ListNode{
-			Val:  v,
-			Next: prevNode,
+		return &ListNode{
+			Val:  l2.Val,
+			Next: mergeTwoLists(nil, l2.Next),
 		}
-		prevNode = node
-		if i == len(vals) -1 {
-			root = node
+	} else if l2 == nil {
+		if l1 == nil {
+			return nil
+		}
+		return &ListNode{
+			Val:  l1.Val,
+			Next: mergeTwoLists(l1.Next, nil),
+		}
+	} else if l1.Val > l2.Val {
+		return &ListNode{
+			Val:  l2.Val,
+			Next: mergeTwoLists(l1, l2.Next),
 		}
 	}
-	return root
+	return &ListNode{
+		Val:  l1.Val,
+		Next: mergeTwoLists(l1.Next, l2),
+	}
 }
