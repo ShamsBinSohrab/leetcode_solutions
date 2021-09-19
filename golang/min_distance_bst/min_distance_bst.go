@@ -42,6 +42,7 @@ func main() {
 	}
 	fmt.Println(minDiffInBST(&root))
 }
+
 var bfs func(node *TreeNode)
 
 func minDiffInBST(root *TreeNode) int {
@@ -58,8 +59,8 @@ func minDiffInBST(root *TreeNode) int {
 	sort.Ints(dist)
 	min := math.MaxInt32
 	for i, v := range dist {
-		if (i != len(dist) -1) && (dist[i + 1] - v < min) {
-			min = dist[i + 1] - v
+		if (i != len(dist)-1) && (dist[i+1]-v < min) {
+			min = dist[i+1] - v
 		}
 	}
 	return min
