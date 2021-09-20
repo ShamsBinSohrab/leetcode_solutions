@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-//Problem: https://leetcode.com/problems/binary-tree-preorder-traversal/
+//Problem: https://leetcode.com/problems/binary-tree-postorder-traversal/
 
 type TreeNode struct {
 	Val   int
