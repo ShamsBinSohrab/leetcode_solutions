@@ -21,15 +21,13 @@ func thirdMax(nums []int) int {
 	idx := 0
 	hash := make(map[int]int)
 	for i := n - 1; i >= 0 && idx < 3; i-- {
-		if _, ok := hash[nums[i]]; !ok {
-			hash[nums[i]] = idx
+		if idx == 0 || hash[idx-1] != nums[i] {
+			hash[idx] = nums[i]
 			idx++
 		}
 	}
-	for k, v := range hash {
-		if v == 2 {
-			return k
-		}
+	if v, ok := hash[2]; ok {
+		return v
 	}
 	return nums[n-1]
 }
