@@ -2,6 +2,8 @@ package main
 
 import "fmt"
 
+//Problem: https://leetcode.com/problems/move-zeroes/
+
 func main() {
 	nums := []int{0, 1, 0, 3, 12}
 	moveZeroes(nums)
